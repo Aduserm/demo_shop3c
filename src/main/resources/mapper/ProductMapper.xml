@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zjitc.dao.ProductDao">
+  <resultMap id="ProductDao" type="com.zjitc.pojo.Product">
+    <id column="pid" property="pid"/>
+    <result column="pname" property="name"/>
+    <result column="market_price" property="marketPrice"/>
+    <result column="shop_price" property="shopPrice"/>
+    <result column="pimage" property="image"/>
+    <result column="pdate" property="date"/>
+    <result column="is_hot" property="isHot"/>
+    <result column="pdesc" property="desc"/>
+    <result column="pflag" property="flag"/>
+    <result column="cid" property="cid"/>
+  </resultMap>
+
+  <select id="findHots" resultMap="ProductDao">
+    SELECT *
+    FROM product
+    WHERE is_hot = 1 limit 9
+  </select>
+
+  <select id="findNest" resultMap="ProductDao">
+        SELECT *
+        FROM product
+        ORDER BY pdate DESC limit 9
+    </select>
+
+  <select id="findByPid" resultMap="ProductDao">
+        SELECT *
+        FROM product
+        WHERE pid = #{pid}
+    </select>
+
+  <select id="findPageCid" resultMap="ProductDao">
+        SELECT *
+        FROM product
+        WHERE cid = #{cid}
+  </select>
+</mapper>
